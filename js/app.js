@@ -40,31 +40,32 @@ $(document).ready(function(){
 	// End Nav Bar
 
 
+	
 	// Start Property Section
-	$('.propertylists').click(function(){
+	$('.propertylists').click(function () {
+		$(this).addClass('activeitems')
+			.siblings().removeClass('activeitems');
 
-		// $(this).addClass('activeitems');
-		$(this).addClass('activeitems').siblings().removeClass('activeitems');
+		const ftvalue = $(this).attr('data-filter');
 
-		let ftvalue = $(this).attr('data-filter');
-		// console.log(ftvalue);
+		if (ftvalue === 'all') {
+			$('.filters').stop(true, true).fadeIn(300);
+		} else {
+			$('.filters').stop(true, true).each(function () {
+				const matches = $(this).hasClass(ftvalue);
 
-		if(ftvalue === 'all'){
-			$('.filters').show("slide",500);
-		}else{
-			$('.filters').hide();
-
-			$('.filters').not('.'+ftvalue).hide("slide",500);
-			$('.filters').filter('.'+ftvalue).show("slide",500);
+				if (matches) {
+					$(this).fadeIn(300);
+				} else {
+					$(this).fadeOut(300);
+				}
+			});
 		}
-
 	});
 
-
 	lightbox.option({
-      	showImageNumberLabel:false
-    });
-	
+		showImageNumberLabel: false
+	});
 	// End Property Section
 
 	// Start Adv Section
